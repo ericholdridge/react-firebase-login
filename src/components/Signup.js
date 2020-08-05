@@ -1,21 +1,12 @@
 import React from "react";
 import fire from "../config/fire";
 
-const Login = ({ email, setEmail, password, setPassword }) => {
-  // Handle the user sign up
-  const handleSignup = () => {
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        console.log("Error" + err);
-      });
-  };
-
+const Signup = ({ email, setEmail, password, setPassword, handleUserSignup }) => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-black">
       <div className="container mx-auto flex justify-center">
         <div className="w-full max-w-lg">
+          <h1 className="text-white">Sign Up</h1>
           <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label
@@ -56,9 +47,9 @@ const Login = ({ email, setEmail, password, setPassword }) => {
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
-                onClick={handleSignup}
+                onClick={() => handleUserSignup(email, password)}
               >
-                Sign In
+                Sign Up
               </button>
               <a
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
@@ -74,4 +65,4 @@ const Login = ({ email, setEmail, password, setPassword }) => {
   );
 };
 
-export default Login;
+export default Signup;

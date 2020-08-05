@@ -1,35 +1,32 @@
-import React, {useState} from 'react';
-import './App.css';
-import fire from "./config/fire";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route
+} from "react-router-dom";
+import "./App.css";
 
-import Home from "./components/Home";
-import Login from "./components/Login";
-import { useEffect } from 'react';
+// User signup/login context
+import { SignupLoginState } from "./components/SignupLoginContext/SignupLoginContext"; 
+
+// Components
+import Hero from "./components/Hero/Hero";
+import Signin from "./components/Signin";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    authListener();
-  }, []);
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if(user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    })
-  }
-
   return (
-    <div className="App">
-      {user ? <Home /> : <Login email={email} setEmail={setEmail} password={password} setPassword={setPassword}/>}
-    </div>
+    <SignupLoginState>
+      <div className="App">
+        <Router>
+          <Route path="/" exact>
+            <Hero />
+          </Route>
+          <Route path="/signin">
+            <Signin />
+          </Route>
+        </Router>
+      </div>
+    </SignupLoginState>
   );
-}
+};
 
 export default App;
