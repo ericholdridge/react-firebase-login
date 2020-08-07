@@ -1,35 +1,39 @@
+import { useHistory } from "react-router-dom";
 import React, { useState, createContext } from "react";
 import fire from "../../config/fire";
-import { useEffect } from "react";
+import { useEffect } from "react";;
 
-export const SignupLoginContext = createContext();
+export const AuthContext = createContext();
 
-export const SignupLoginState = ({ children }) => {
-  const [user, setUser] = useState(null);
+export const AuthProvider= ({ children }) => {
+  const [currentUser, setCurrentUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hasAccount, setHasAccount] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     authListener();
   }, []);
 
   const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
+    fire.auth().onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        setCurrentUser(currentUser);
       } else {
-        setUser(null);
+        setCurrentUser("");
       }
     });
   };
 
   // Handle user sign up
-  const handleUserSignup = (email, password) => {
+  const handleUserSignup = () => {
     fire
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        console.log("Error" + err);
+      .catch((error) => {
+        console.log("Error" + error);
       });
   };
 
@@ -42,23 +46,25 @@ export const SignupLoginState = ({ children }) => {
         console.log(error);
       });
   };
+
   return (
-    <SignupLoginContext.Provider
+    <AuthContext.Provider
       value={{
-        user,
-        setUser,
+        currentUser,
+        setCurrentUser,
         email,
         setEmail,
         password,
         setPassword,
-        handleUserSignup,
-        handleUserSignIn,
         authListener,
+        hasAccount,
+        setHasAccount,
+        handleUserSignIn,
+        handleUserSignup,
       }}
     >
       {children}
-    </SignupLoginContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-// {user ? <Home /> : <Signup />}

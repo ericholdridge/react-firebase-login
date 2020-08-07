@@ -1,22 +1,42 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import fire from "../config/fire";
+import { Link, useHistory } from "react-router-dom";
 // Context
-import { useContext } from "react";
-import { SignupLoginContext } from "./SignupLoginContext/SignupLoginContext";
+import React, { useContext } from "react";
+import { AuthContext } from "./Auth/Auth";
 
 // Components
 import Navbar from "./Navbar/Navbar";
 import Container from "./ReusableComponents/Container";
+import Input from "./ReusableComponents/Input";
 
 const Signin = () => {
   const {
+    currentUser,
     email,
     setEmail,
     password,
     setPassword,
-    handleUserSignup,
-  } = useContext(SignupLoginContext);
+    hasAccount,
+    setHasAccount,
+    handleUserSignIn,
+    handleUserSignup
+  } = useContext(AuthContext);
+
+  const history = useHistory();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if(currentUser) {
+      history.push("/courses");
+      return;
+    }
+    if(hasAccount){
+      handleUserSignIn();
+    } else {
+      handleUserSignup();
+    }
+  }
 
   return (
     <section css={styles} className="signin">
@@ -24,17 +44,36 @@ const Signin = () => {
       <Container>
         <div className="signin-form">
           <div className="signup-link">
-            <h1>Don't have an account?</h1>
-            <a href="">Sign up</a>
+            {/* <h1>Don't have an account?</h1> */}
+            <Link to="/signup">Sign up</Link>
           </div>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
-            <input type="email" placeholder="example@example.com" />
-            <label htmlFor="email">Password</label>
-            <input type="email" placeholder="*************" />
+            <Input
+              inputType="email"
+              inputPlaceholder="example@example.com"
+              inputVal={email}
+              setInputVal={setEmail}
+            />
+            <label htmlFor="password">Password</label>
+            <Input
+              inputType="password"
+              inputPlaceholder="*************"
+              inputVal={password}
+              setInputVal={setPassword}
+            />
             <div className="wrap">
-              <button type="submit">Sign in</button>
-              <a href="">Forgot password?</a>
+              {hasAccount ? (
+                <React.Fragment>
+                  <button type="submit">Login</button>
+                  <p onClick={() => setHasAccount(!hasAccount)}>Don't have an account, Signup</p>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <button type="submit">Sign up</button>
+                  <p onClick={() => setHasAccount(!hasAccount)}>Have an account, Login</p>
+                </React.Fragment>
+              )}
             </div>
           </form>
         </div>
@@ -74,7 +113,7 @@ const styles = css`
         }
         a {
           color: #fff;
-          font-size: .9rem;
+          font-size: 0.9rem;
         }
       }
       form {
@@ -125,7 +164,7 @@ const styles = css`
           }
           a {
             color: #fff;
-            font-size: <div className= "8" ></div>rem;
+            font-size: 0.8rem;
           }
         }
       }

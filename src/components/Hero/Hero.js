@@ -5,17 +5,18 @@ import { css, jsx } from "@emotion/core";
 import Container from "../ReusableComponents/Container";
 import Navbar from "../Navbar/Navbar";
 
+// Images
+import HeroImage from "../../images/heroImage.jpg";
+
 const Hero = () => {
   return (
     <section css={styles} className="hero">
-        <Navbar />
-        <Container>
-          <div className="hero-content">
-            <h3>Online Web Developement Courses</h3>
-            <h1>Learn Web Development on your own!</h1>
-            <a href="">Get Started</a>
-          </div>
-        </Container>
+      <Navbar />
+      <Container>
+        <div className="hero-content">
+          <a href="">Get Started</a>
+        </div>
+      </Container>
     </section>
   );
 };
@@ -34,16 +35,16 @@ const styles = css`
       width: 100%;
       text-align: center;
       h3 {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
       }
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       a {
         display: inline-block;
         text-align: center;
         background: #84a9ac;
-        padding: 12px 35px;
+        padding: 12px 6px;
         border-radius: 4px;
         margin: 20px 0 0 0;
         color: #fff;
@@ -52,6 +53,6 @@ const styles = css`
       }
     }
   }
-`
+`;
 
 export default Hero;
