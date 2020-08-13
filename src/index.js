@@ -5,13 +5,16 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { AuthProvider } from "./components/Auth/Auth";
+import { CodeState } from "./components/CodeContext/CodeContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-    <Router>
-      <App />
-      </Router>
+      <CodeState>
+        <Router>
+          <App />
+        </Router>
+      </CodeState>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")

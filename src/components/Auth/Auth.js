@@ -1,11 +1,11 @@
 import { useHistory } from "react-router-dom";
 import React, { useState, createContext } from "react";
 import fire from "../../config/fire";
-import { useEffect } from "react";;
+import { useEffect } from "react";
 
 export const AuthContext = createContext();
 
-export const AuthProvider= ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +47,14 @@ export const AuthProvider= ({ children }) => {
       });
   };
 
+  // Handle user log out
+  const handleUserLogout = () => {
+    setEmail("");
+    setPassword("");
+    fire.auth().signOut();
+    history.push("/");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -61,10 +69,10 @@ export const AuthProvider= ({ children }) => {
         setHasAccount,
         handleUserSignIn,
         handleUserSignup,
+        handleUserLogout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-

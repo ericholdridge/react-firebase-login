@@ -66,12 +66,12 @@ const Signin = () => {
               {hasAccount ? (
                 <React.Fragment>
                   <button type="submit">Login</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>Don't have an account, Signup</p>
+                  <p onClick={() => setHasAccount(!hasAccount)}>Don't have an account, <span>Signup</span></p>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   <button type="submit">Sign up</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>Have an account, Login</p>
+                  <p onClick={() => setHasAccount(!hasAccount)}>Have an account, <span>Login</span></p>
                 </React.Fragment>
               )}
             </div>
@@ -162,9 +162,13 @@ const styles = css`
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
               0 6px 20px 0 rgba(0, 0, 0, 0.19);
           }
-          a {
+          p {
+            font-size: .9rem;
             color: #fff;
-            font-size: 0.8rem;
+            span {
+              color: #84a9ac;
+              text-decoration: underline;
+            }
           }
         }
       }
