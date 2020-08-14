@@ -3,7 +3,8 @@ import { css, jsx } from "@emotion/core";
 import Navbar from "./Navbar/Navbar";
 import Container from "./ReusableComponents/Container";
 import Questions from "./Questions/Questions";
-import CodeSandbox from "./CodeSandbox";
+import CodeEditor from "./CodeEditor";
+import UsersOutput from "./UsersOutput";
 
 const Playground = () => {
   return (
@@ -11,7 +12,10 @@ const Playground = () => {
       <Navbar />
       <Container>
         <Questions />
-        <CodeSandbox />
+        <div className="wrapper">
+          <CodeEditor/>
+          <UsersOutput />
+        </div>
       </Container>
     </section>
   );
@@ -24,9 +28,9 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    .codeSandbox {
-      border: 1px solid black;
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
     }
   }
 `;

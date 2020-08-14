@@ -4,7 +4,7 @@ import "./App.css";
 
 // Components
 import Hero from "./components/Hero/Hero";
-import Signin from "./components/Signin";
+import Signin from "./components/Auth/Signin";
 import Courses from "./components/Courses";
 import { AuthContext } from "./components/Auth/Auth";
 import Playground from "./components/Playground";
@@ -18,7 +18,7 @@ const App = () => {
       <Route exact path="/courses" component={Courses} />
       <Route exact path="/" component={Hero} />
       <Route path="/signin" component={Signin} />
-      {currentUser ? <Route path="/courses/css/:number" component={Playground} /> : <Redirect exact to="/" />}
+      <Route path="/courses/css/:number" component={Playground} />
     </div>
   );
 };

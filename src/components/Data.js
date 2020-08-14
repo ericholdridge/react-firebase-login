@@ -1,7 +1,6 @@
 export default [
   {
     question: "In this task, center the text horizontally using css.",
-    example: "For example, text-align: left; will move the text to the left.",
     answer: "text-align: center;",
   },
   {

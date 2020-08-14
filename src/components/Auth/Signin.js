@@ -3,12 +3,12 @@ import { css, jsx } from "@emotion/core";
 import { Link, useHistory } from "react-router-dom";
 // Context
 import React, { useContext } from "react";
-import { AuthContext } from "./Auth/Auth";
+import { AuthContext } from "./Auth";
 
 // Components
-import Navbar from "./Navbar/Navbar";
-import Container from "./ReusableComponents/Container";
-import Input from "./ReusableComponents/Input";
+import Navbar from "../Navbar/Navbar";
+import Container from "../ReusableComponents/Container";
+import Input from "../ReusableComponents/Input";
 
 const Signin = () => {
   const {

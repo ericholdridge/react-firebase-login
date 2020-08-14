@@ -5,9 +5,12 @@ export const CodeContext = createContext();
 
 export const CodeState = ({ children }) => {
   const [data, setData] = useState(Data);
-  const [currentQuestion, setCurrentQuestion ] = useState(1);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [input, setInput] = useState("");
 
-  return <CodeContext.Provider value={{data, setData}}>{children}</CodeContext.Provider>;
+  return (
+    <CodeContext.Provider value={{ data, setData, input, setInput }}>
+      {children}
+    </CodeContext.Provider>
+  );
 };
- 

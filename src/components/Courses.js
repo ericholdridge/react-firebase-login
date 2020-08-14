@@ -4,14 +4,9 @@ import { css, jsx } from "@emotion/core";
 // Components
 import Navbar from "./Navbar/Navbar";
 import Container from "./ReusableComponents/Container";
-import Questions from "./Questions/Questions";
-import { useContext } from "react";
-import { CodeContext } from "./CodeContext/CodeContext";
-import CodeSandbox from "./CodeSandbox";
 import Course from "./Courses/Course";
 
 const Courses = () => {
-  const { data, setData } = useContext(CodeContext);
   return (
     <section css={styles} className="courses">
       <Navbar />
@@ -21,8 +16,6 @@ const Courses = () => {
           courseTitle="Cascading Style Sheets"
           courseInfo="In this course, you will learn the fundamentals of CSS and how to apply custom styles to HTML elements."
         />
-        {/* <Questions />
-        <CodeSandbox /> */}
       </Container>
     </section>
   );
