@@ -20,7 +20,6 @@ const Questions = () => {
       {number === "8" && <p>{data[7].question}</p>}
       {number === "9" && <p>{data[8].question}</p>}
       {number === "10" && <p>{data[9].question}</p>}
-
       <Link to={`/courses/css/${parseInt(number, 10) + 1}`}>Next Question</Link>
     </div>
   );

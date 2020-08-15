@@ -1,14 +1,16 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import { useContext } from "react";
+import { CodeContext } from "../CodeContext/CodeContext";
 
 const Answer1 = () => {
+  const {input, data} = useContext(CodeContext);
     return(
-        <div></div>
+        <div style={{textAlign: input === data[0].answer ? "center" : null}}>
+          <p style={{fontSize: "1rem", padding: "10px 0 0 10px"}}>hello</p>
+        </div>
     );
 };
 
-const styles = css`
-  width: 100%;
-`
 
 export default Answer1;

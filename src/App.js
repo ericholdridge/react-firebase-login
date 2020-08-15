@@ -18,7 +18,7 @@ const App = () => {
       <Route exact path="/courses" component={Courses} />
       <Route exact path="/" component={Hero} />
       <Route path="/signin" component={Signin} />
-      <Route path="/courses/css/:number" component={Playground} />
+     { currentUser ? <Route path="/courses/css/:number" component={Playground} /> : null }
     </div>
   );
 };
