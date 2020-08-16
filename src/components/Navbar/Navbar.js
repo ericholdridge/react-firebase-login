@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Auth/Auth";
 
 const Navbar = () => {
-  const { currentUser, handleFirebaseLogout} = useContext(AuthContext);
+  const { user, handleFirebaseLogout} = useContext(AuthContext);
   const history = useHistory();
 
   // Log the user out of the account if the log out button is clicked
@@ -27,14 +27,14 @@ const Navbar = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {currentUser ? (
+            {user ? (
               <li>
                 <Link to="/courses">
                   Courses
                 </Link>
               </li>
             ) : null}
-            {currentUser ? (
+            {user ? (
               <li>
                 <Link to="/" onClick={handleUserLogout}>
                   Log out

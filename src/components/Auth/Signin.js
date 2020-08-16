@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { Link, useHistory } from "react-router-dom";
 // Context
 import React, { useContext } from "react";
 import { AuthContext } from "./Auth";
@@ -11,7 +10,6 @@ import Input from "../ReusableComponents/Input";
 
 const Signin = () => {
   const {
-    currentUser,
     email,
     setEmail,
     password,
@@ -22,16 +20,9 @@ const Signin = () => {
     handleUserSignup,
   } = useContext(AuthContext);
 
-  const history = useHistory();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUserSignIn();
-    if (hasAccount) {
-      handleUserSignIn();
-    } else {
-      handleUserSignup();
-    }
   };
 
   return (
@@ -39,11 +30,7 @@ const Signin = () => {
       <Navbar />
       <Container>
         <div className="signin-form">
-          <div className="signup-link">
-            {/* <h1>Don't have an account?</h1> */}
-            <Link to="/signup">Sign up</Link>
-          </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}> 
             <label htmlFor="email">Email</label>
             <Input
               inputType="email"

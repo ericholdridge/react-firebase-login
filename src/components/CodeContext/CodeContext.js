@@ -5,7 +5,6 @@ export const CodeContext = createContext();
 
 export const CodeState = ({ children }) => {
   const [data, setData] = useState(Data);
-  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [input, setInput] = useState("");
 
   // Clears the input value when user clicks the next question button
