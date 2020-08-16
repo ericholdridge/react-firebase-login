@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import React, { useState, createContext } from "react";
 import fire from "../../config/fire";
 import { useEffect } from "react";
@@ -10,8 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
-
-  const history = useHistory();
 
   useEffect(() => {
     authListener();
@@ -48,11 +45,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Handle user log out
-  const handleUserLogout = () => {
+  const handleFirebaseLogout = () => {
     setEmail("");
     setPassword("");
     fire.auth().signOut();
-    history.push("/");
   };
 
   return (
@@ -69,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         setHasAccount,
         handleUserSignIn,
         handleUserSignup,
-        handleUserLogout,
+        handleFirebaseLogout
       }}
     >
       {children}

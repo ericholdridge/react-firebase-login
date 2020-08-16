@@ -4,9 +4,6 @@ import { css, jsx } from "@emotion/core";
 // Components
 import Navbar from "../Navbar/Navbar";
 
-// Images
-import HeroImage from "../../images/heroImage.jpg";
-
 const Hero = () => {
   return (
     <section css={styles} className="hero">

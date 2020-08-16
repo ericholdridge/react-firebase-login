@@ -1,19 +1,26 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { Link } from "react-router-dom";
-
+import { Link, useHistory} from "react-router-dom";
 // Components
 import Container from "../ReusableComponents/Container";
 import { useContext } from "react";
 import { AuthContext } from "../Auth/Auth";
 
 const Navbar = () => {
-  const { currentUser, handleUserLogout } = useContext(AuthContext);
+  const { currentUser, handleFirebaseLogout} = useContext(AuthContext);
+  const history = useHistory();
+
+  // Log the user out of the account if the log out button is clicked
+  const handleUserLogout = () => {
+    handleFirebaseLogout();
+    history.push("/");
+  }
+
   return (
     <nav css={styles} className="nav">
       <Container>
         <div className="nav-logo">
-          <a href="">LearnWebDevelopment</a>
+          <Link to="/">LearnWebDevelopment</Link>
         </div>
         <div className="nav-items">
           <ul>
@@ -22,16 +29,22 @@ const Navbar = () => {
             </li>
             {currentUser ? (
               <li>
-                <Link to="/logout" onClick={handleUserLogout}>Log out</Link>
+                <Link to="/courses">
+                  Courses
+                </Link>
+              </li>
+            ) : null}
+            {currentUser ? (
+              <li>
+                <Link to="/" onClick={handleUserLogout}>
+                  Log out
+                </Link>
               </li>
             ) : (
               <li>
                 <Link to="/signin">Sign in</Link>
               </li>
             )}
-            <li>
-              <Link to="/freetrial">Free Trial</Link>
-            </li>
           </ul>
         </div>
       </Container>

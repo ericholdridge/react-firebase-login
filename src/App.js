@@ -14,11 +14,16 @@ const App = () => {
   return (
     <div className="App">
       {/* Check if user is logged in */}
-      {/* {currentUser ? <Route exact path="/courses" component={Courses} /> : <Redirect to="/" />} */}
-      <Route exact path="/courses" component={Courses} />
+      {currentUser ? (
+        <Route exact path="/courses" component={Courses} />
+      ) : (
+        <Redirect to="/" />
+      )}
       <Route exact path="/" component={Hero} />
       <Route path="/signin" component={Signin} />
-     { currentUser ? <Route path="/courses/css/:number" component={Playground} /> : null }
+      {currentUser ? (
+        <Route path="/courses/css/:number" component={Playground} />
+      ) : null}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 // Context
 import React, { useContext } from "react";
 import { AuthContext } from "./Auth";
-
 // Components
 import Navbar from "../Navbar/Navbar";
 import Container from "../ReusableComponents/Container";
@@ -20,23 +19,20 @@ const Signin = () => {
     hasAccount,
     setHasAccount,
     handleUserSignIn,
-    handleUserSignup
+    handleUserSignup,
   } = useContext(AuthContext);
 
   const history = useHistory();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(currentUser) {
-      history.push("/courses");
-      return;
-    }
-    if(hasAccount){
+    handleUserSignIn();
+    if (hasAccount) {
       handleUserSignIn();
     } else {
       handleUserSignup();
     }
-  }
+  };
 
   return (
     <section css={styles} className="signin">
@@ -66,12 +62,16 @@ const Signin = () => {
               {hasAccount ? (
                 <React.Fragment>
                   <button type="submit">Login</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>Don't have an account, <span>Signup</span></p>
+                  <p onClick={() => setHasAccount(!hasAccount)}>
+                    Don't have an account, <span>Signup</span>
+                  </p>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   <button type="submit">Sign up</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>Have an account, <span>Login</span></p>
+                  <p onClick={() => setHasAccount(!hasAccount)}>
+                    Have an account, <span>Login</span>
+                  </p>
                 </React.Fragment>
               )}
             </div>
@@ -163,7 +163,7 @@ const styles = css`
               0 6px 20px 0 rgba(0, 0, 0, 0.19);
           }
           p {
-            font-size: .9rem;
+            font-size: 0.9rem;
             color: #fff;
             span {
               color: #84a9ac;

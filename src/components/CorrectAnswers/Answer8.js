@@ -3,21 +3,22 @@ import { css, jsx } from "@emotion/core";
 import { useContext } from "react";
 import { CodeContext } from "../CodeContext/CodeContext";
 
-const Answer1 = () => {
+const Answer8 = () => {
   const {input, data} = useContext(CodeContext);
+
     return(
         <div css={styles}>
-          <p style={{textAlign: input === data[0].answer ? "center" : null}}>Align this text to the center</p>
+          <p style={{fontSize: input === data[7].answer ? "25px" : null}}>Change font size</p>
         </div>
     );
 };
 
 const styles = css`
   width: 100%;
-   p {
-     font-size: 1rem;
-   }
+  text-align: center;
+  p {
+    font-size: 1rem;
+  }
 `
 
-
-export default Answer1;
+export default Answer8;

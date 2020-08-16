@@ -8,8 +8,13 @@ export const CodeState = ({ children }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [input, setInput] = useState("");
 
+  // Clears the input value when user clicks the next question button
+  const clearInputValue = () => {
+    setInput("");
+  };
+
   return (
-    <CodeContext.Provider value={{ data, setData, input, setInput }}>
+    <CodeContext.Provider value={{ data, setData, input, setInput, clearInputValue }}>
       {children}
     </CodeContext.Provider>
   );
