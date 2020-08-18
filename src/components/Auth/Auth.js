@@ -10,17 +10,24 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const [signupError, setSignupError] = useState("");
+  const [loginError, setLoginError] = useState("");
 
 
   // Handle user sign up
-  // const handleUserSignup = () => {
-  //   fire
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .catch((error) => {
-  //       console.log("Error" + error);
-  //     });
-  // };
+  const handleUserSignup = () => {
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(error => {
+        // If the email or password are invalid
+        if(error.code === "auth/invalid-email") {
+          setSignupError("*Invalid email or password. Please try again.");
+        } else {
+          return;
+        }
+      })
+  };
 
   // Handle user log in
   const handleUserSignIn = () => {
@@ -28,7 +35,12 @@ export const AuthProvider = ({ children }) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .catch(error => {
-        console.log(error);
+         // If the email or password are invalid
+         if(error.code === "auth/user-not-found") {
+          setLoginError("*User not found. Try again.");
+        } else {
+          return;
+        }
       })
   };
 
@@ -49,10 +61,14 @@ export const AuthProvider = ({ children }) => {
         password,
         setPassword,
         hasAccount,
+        signupError,
+        setSignupError,
+        loginError,
+        setLoginError,
         setHasAccount,
         handleUserSignIn,
-        // handleUserSignup,
-        handleFirebaseLogout, 
+        handleUserSignup,
+        handleFirebaseLogout,
       }}
     >
       {children}

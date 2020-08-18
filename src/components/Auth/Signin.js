@@ -18,19 +18,18 @@ const Signin = () => {
     setHasAccount,
     handleUserSignIn,
     handleUserSignup,
+    signupError,
+    setSignupError,
+    loginError,
+    setLoginError
   } = useContext(AuthContext);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleUserSignIn();
-  };
 
   return (
     <section css={styles} className="signin">
       <Navbar />
       <Container>
         <div className="signin-form">
-          <form onSubmit={handleSubmit}> 
+          <div className="form">
             <label htmlFor="email">Email</label>
             <Input
               inputType="email"
@@ -48,21 +47,31 @@ const Signin = () => {
             <div className="wrap">
               {hasAccount ? (
                 <React.Fragment>
-                  <button type="submit">Login</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>
-                    Don't have an account, <span>Signup</span>
-                  </p>
+                  <div className="signupError">
+                    <p>{loginError}</p>
+                  </div>
+                  <div className="wrapper">
+                    <button onClick={handleUserSignIn}>Login</button>
+                    <p onClick={() => setHasAccount(!hasAccount)}>
+                      Don't have an account, <span>Signup</span>
+                    </p>
+                  </div>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <button type="submit">Sign up</button>
-                  <p onClick={() => setHasAccount(!hasAccount)}>
-                    Have an account, <span>Login</span>
-                  </p>
+                  <div className="signupError">
+                    <p>{signupError}</p>
+                  </div>
+                  <div className="wrapper">
+                    <button onClick={handleUserSignup}>Sign up</button>
+                    <p onClick={() => setHasAccount(!hasAccount)}>
+                      Have an account, <span>Login</span>
+                    </p>
+                  </div>
                 </React.Fragment>
               )}
             </div>
-          </form>
+          </div>
         </div>
       </Container>
     </section>
@@ -103,7 +112,7 @@ const styles = css`
           font-size: 0.9rem;
         }
       }
-      form {
+      .form {
         width: 100%;
         max-width: 400px;
         display: flex;
@@ -132,10 +141,6 @@ const styles = css`
           }
         }
         .wrap {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 12px 0 0 0;
           button {
             width: 100%;
             max-width: 100px;
@@ -156,6 +161,16 @@ const styles = css`
               color: #84a9ac;
               text-decoration: underline;
             }
+          }
+          .signupError {
+            p {
+              padding: 12px 0;
+            }
+          }
+          .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
           }
         }
       }
